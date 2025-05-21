@@ -6,6 +6,7 @@ import cors from "cors";
 
 const app = express();
 
+const PORT = 3000;
 connectToDb();
 app.use(cors());
 
@@ -16,4 +17,6 @@ app.use("/v1/api/work", workRoute);
 //   res.send("Hello World");
 // });
 
-app.listen(3000);
+app.listen(PORT, function () {
+  console.log("Server listening on Port", PORT);
+});
