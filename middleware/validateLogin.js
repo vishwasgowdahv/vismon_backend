@@ -13,7 +13,7 @@ const validateLogin = async (req, res, next) => {
     const jwtverify = verify(token, JWT_SECRET);
     req.user = new mongoose.Types.ObjectId(jwtverify);
     sucess=true;
-    next();
+    next(); 
   } catch (error) {
     res.status(401).json({sucess,error:"Authenticate with Valid jwttoken"});
   }

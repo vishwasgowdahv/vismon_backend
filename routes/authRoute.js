@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import validateLogin from "../middleware/validateLogin.js";
 const { sign, verify } = jwt;
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -55,7 +56,7 @@ router.post(
     }),
   ],
   async (req, res) => {
-    sucess = false;
+    sucess = false;  
     const results = validationResult(req);
     if (!results.isEmpty()) {
       return res.status(404).json({ sucess, error: results.array() });
@@ -86,8 +87,8 @@ router.post(
 
 //fetchUserData
 router.post("/fetchuser", validateLogin, async (req, res) => {
-  const user = await User.findById(req.user.id).select("-password");
-  res.json({ sucess, user });
+  const user = await User.findById(new mongoose.Types.ObjectId(req.user.id)).select("-password");
+  res.json({ sucess, user }); 
 });
 
 export default router;
