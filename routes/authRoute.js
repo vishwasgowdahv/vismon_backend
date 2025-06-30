@@ -87,7 +87,9 @@ router.post(
 
 //fetchUserData
 router.post("/fetchuser", validateLogin, async (req, res) => {
+  sucess=false;
   const user = await User.findById(new mongoose.Types.ObjectId(req.user.id)).select("-password");
+  sucess = true;
   res.json({ sucess, user }); 
 });
 
